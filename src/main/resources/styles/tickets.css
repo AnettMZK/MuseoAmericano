@@ -1,0 +1,164 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+Label {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-text-fill: #353331;
+    -fx-font-size: 20px;
+}
+
+
+Button {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 18px;
+    -fx-text-fill: #edeae2;
+    -fx-background-color: #353331;
+    -fx-background-radius: 10;   
+}
+
+TextField { 
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-background-color: #a19c90;
+     
+}
+
+
+/*Cambio general del TabPane (contenido, cabecera, ancho y altura de las pestañas, espaciado y padding)*/
+TabPane {
+    -fx-background-color: #d6d2c6;
+    -fx-tab-min-width: 120px;     
+    -fx-tab-max-width: 200px;      
+    -fx-tab-min-height: 40px;      
+    -fx-tab-max-height: 40px;      
+    -fx-padding: 8;               
+}
+
+/*Cambia el fondo del área donde están las pestañas (la cabecera del TabPane)*/
+.tab-header-area {
+    -fx-background-color: #d6d2c6;
+}
+
+/*Color de fondo para el área de encabezado*/ 
+.tab-pane .tab-header-background {
+    -fx-background-color: transparent; 
+}
+
+
+/*Edita las pestañas no seleccionadas (fondo, texto, fuente, tamaño, redondeo de border)*/
+.tab {
+    -fx-background-insets: 0;         
+    -fx-background-color: #d6d2c6;            
+    -fx-font-family: 'Bodoni Moda';   
+    -fx-border-color: transparent;
+    -fx-font-size: 16px;              
+    -fx-background-radius: 20;         
+}
+
+/*Edita las pestañas seleccionadas (fondo y borde)*/
+.tab:selected {
+    -fx-background-color: #353331; 
+    -fx-border-color: transparent; 
+}
+
+ /*Cambia el color del texto de todas las pestañas (si no están seleccionadas)*/
+.tab-label {
+    -fx-text-fill: #353331; 
+    -fx-font-size: 20px;
+}
+
+ /*Cambia el color del texto de la pestaña seleccionada*/
+.tab:selected .tab-label {
+    -fx-text-fill: #edeae2; 
+}
+
+ /*Cambia el area de contenido(AnchorPane de cada pestaña)*/
+.tab-content-area {
+    -fx-background-color: #d6d2c6; 
+    -fx-padding: 15;   
+}
+
+/*Elimina lo resaltado de cada pestaña*/
+.tab-pane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/*Edita el AnchorPane donde se ingresa la info*/
+.contentTab {
+    -fx-background-color: #ece9e1;
+    -fx-background-radius: 20px;
+}
+
+TableView {
+    -fx-background-color: #edeae2;
+    -fx-table-cell-border-color: #d4a373;
+     -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #a19c90; /* Fondo del encabezado */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #d4a373;
+    -fx-text-fill: #edeae2;
+}
+
+/*Edita el choiceBox (color, letra, padding)*/
+ChoiceBox { 
+    -fx-background-color: #a19c90;
+    -fx-background-radius: 10px;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+    -fx-font-family: "Bodoni Moda 9pt";
+
+}
+
+/* Estilo del texto */
+.choice-box .label {
+    -fx-text-fill: #353331;
+}
+
+/* Flecha del desplegable */
+.choice-box .arrow {
+    -fx-background-color: #353331;
+}
+
+DatePicker {
+    -fx-background-color: #a19c90;
+    -fx-background-radius: 10px;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+    -fx-font-family: "Bodoni Moda 9pt";
+}
+
+/* Texto en el campo */
+.date-picker .text-field {
+    -fx-text-fill: #353331;
+    -fx-background-color: #a19c90;
+}
+
+/* Botón de calendario */
+.date-picker .arrow-button {
+    -fx-background-color: #a19c90;
+    -fx-background-radius: 10px;
+}
+
+.textStyle {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 15px;
+    -fx-text-fill: #a19c90; 
+}
+
+.textInfo {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 30px;
+    -fx-text-fill: #ece9e1; 
+}

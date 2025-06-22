@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="770.0" prefWidth="1300.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.interfazmuseo.MaintenanceController">
+    <stylesheets>
+        <URL value="@/styles/maintenance.css" />
+    </stylesheets>
+   <children>
+      <TabPane prefHeight="770.0" prefWidth="1309.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Museos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="675.0" prefWidth="900.0">
+                     <children>
+                        <AnchorPane prefHeight="677.0" prefWidth="650.0" styleClass="contentTab">
+                           <children>
+                              <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Museos" />
+                              <Label layoutX="27.0" layoutY="98.0" text="Nombre: " />
+                              <TextField fx:id="museumName_tf" layoutX="28.0" layoutY="129.0" prefHeight="36.0" prefWidth="570.0" />
+                              <Label layoutX="30.0" layoutY="185.0" text="Ubicación: " />
+                              <Label layoutX="27.0" layoutY="271.0" prefHeight="31.0" prefWidth="95.0" text="Director:" />
+                              <Label layoutX="33.0" layoutY="436.0" text="Fecha de Fundación: " />
+                              <Label layoutX="31.0" layoutY="359.0" text="Sitio Web: " />
+                              <TextField fx:id="museumLocation_tf" layoutX="28.0" layoutY="216.0" prefHeight="36.0" prefWidth="570.0" />
+                              <TextField fx:id="managername_tf" layoutX="28.0" layoutY="302.0" prefHeight="36.0" prefWidth="570.0" />
+                              <TextField fx:id="museumWebURL_tf" layoutX="32.0" layoutY="390.0" prefHeight="36.0" prefWidth="570.0" />
+                              <Label layoutX="392.0" layoutY="438.0" text="Tipo de museo: " />
+                              <DatePicker fx:id="foundationDate_dp" layoutX="35.0" layoutY="468.0" prefHeight="28.0" prefWidth="199.0" />
+                              <ChoiceBox fx:id="typeMuseum_cb" layoutX="392.0" layoutY="470.0" prefHeight="24.0" prefWidth="203.0" />
+                              <Button fx:id="museumSave_btn" layoutX="46.0" layoutY="604.0" mnemonicParsing="false" onAction="#saveMuseumInfo" text="Guardar" />
+                              <Button fx:id="museumCancel_btn" layoutX="444.0" layoutY="604.0" mnemonicParsing="false" onAction="#cancelMuseumInfo" text="Cancelar" />
+                              <Label fx:id="museumWarning_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="554.0" prefHeight="31.0" prefWidth="553.0" text="WARINIGG" />
+                              <Separator layoutX="-1.0" layoutY="538.0" prefHeight="11.0" prefWidth="669.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="709.0" layoutY="-1.0" prefHeight="677.0" prefWidth="553.0" styleClass="tableViewTab">
+                           <children>
+                              <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Ver registros" />
+                              <Button fx:id="museumEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#editMuseumInfo" text="Editar" />
+                              <Button fx:id="museumDelete_btn" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deleteMuseumInfo" text="Eliminar" />
+                              <ScrollPane layoutX="12.0" layoutY="108.0" prefHeight="481.0" prefWidth="530.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="512.0">
+                                       <children>
+                                          <TableView fx:id="museumRegister_tv" prefHeight="456.0" prefWidth="510.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
+                                       </children></AnchorPane>
+                                </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Salas">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="contentTab">
+                           <children>
+                              <TextArea fx:id="roomDescription_ta" layoutX="28.0" layoutY="216.0" prefHeight="200.0" prefWidth="569.0" />
+                              <TextField fx:id="roomID_tf" layoutX="35.0" layoutY="458.0" prefHeight="36.0" prefWidth="156.0" />
+                              <TextField fx:id="roomName_tf" layoutX="28.0" layoutY="129.0" prefHeight="36.0" prefWidth="570.0" />
+                              <Label layoutX="27.0" layoutY="98.0" text="Nombre: " />
+                              <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Salas" />
+                              <Button fx:id="roomSave_btn" layoutX="45.0" layoutY="604.0" mnemonicParsing="false" onAction="#saveRoomInfo" text="Guardar" />
+                           </children></AnchorPane>
+                        <Label layoutX="35.0" layoutY="418.0" text="ID:" />
+                        <Label layoutX="30.0" layoutY="185.0" text="Descripción:" />
+                        <AnchorPane layoutX="709.0" layoutY="-1.0" prefHeight="677.0" prefWidth="580.0" styleClass="tableViewTab">
+                           <children>
+                              <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Ver registros" />
+                              <ScrollPane layoutX="12.0" layoutY="108.0" prefHeight="481.0" prefWidth="530.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="512.0">
+                                       <children>
+                                          <TableView fx:id="roomsRegister_tv" prefHeight="456.0" prefWidth="510.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                              <Button fx:id="roomEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#editRoomInfo" text="Editar" />
+                              <Button fx:id="roomDelete_btn" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deleteRoomInfo" text="Eliminar" />
+                           </children>
+                        </AnchorPane>
+                        <Separator layoutX="-1.0" layoutY="538.0" prefHeight="11.0" prefWidth="669.0" />
+                        <Button fx:id="roomCancel_btn" layoutX="444.0" layoutY="604.0" mnemonicParsing="false" onAction="#cancelRoomInfo" text="Cancelar" />
+                        <Label fx:id="roomWarning_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="554.0" prefHeight="31.0" prefWidth="553.0" text="WARINIGG" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Colecciones">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="contentTab">
+                           <children>
+                              <Label layoutX="27.0" layoutY="98.0" text="Nombre: " />
+                              <TextField fx:id="collectionsName_tf" layoutX="28.0" layoutY="129.0" prefHeight="36.0" prefWidth="570.0" />
+                              <Label layoutX="30.0" layoutY="185.0" text="Siglo: " />
+                              <TextField fx:id="collectionsCentury_tf" layoutX="28.0" layoutY="216.0" prefHeight="36.0" prefWidth="570.0" />
+                              <Label layoutX="27.0" layoutY="271.0" text="Descripción:" />
+                              <TextArea fx:id="collectionsDescription_ta" layoutX="27.0" layoutY="302.0" prefHeight="212.0" prefWidth="569.0" />
+                           </children></AnchorPane>
+                        <AnchorPane layoutX="709.0" layoutY="-1.0" prefHeight="677.0" prefWidth="580.0" styleClass="tableViewTab">
+                           <children>
+                              <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Ver registros" />
+                              <ScrollPane layoutX="12.0" layoutY="108.0" prefHeight="481.0" prefWidth="530.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="512.0">
+                                       <children>
+                                          <TableView fx:id="collectionsRegister_tv" prefHeight="456.0" prefWidth="510.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                              <Button fx:id="collectionsDelete_btn1" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deleteCollectionsInfo" text="Eliminar" />
+                              <Button fx:id="collectionsEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#editCollectionsnfo" text="Editar" />
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Colecciones" />
+                        <Separator layoutX="-1.0" layoutY="538.0" prefHeight="11.0" prefWidth="669.0" />
+                        <Label fx:id="collectionsWarning_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="554.0" prefHeight="31.0" prefWidth="553.0" text="WARINIGG" />
+                        <Button fx:id="collectionsSave_btn1" layoutX="45.0" layoutY="604.0" mnemonicParsing="false" onAction="#saveCollectionsInfo" text="Guardar" />
+                        <Button fx:id="collectionsCancel_btn" layoutX="444.0" layoutY="604.0" mnemonicParsing="false" onAction="#cancelCollectionsInfo" text="Cancelar" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Especies">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="contentTab">
+                           <children>
+                              <Button fx:id="speciesSave_btn" layoutX="45.0" layoutY="604.0" mnemonicParsing="false" onAction="#saveSpeciesInfo" text="Guardar" />
+                              <Button fx:id="speciesCancel_btn" layoutX="444.0" layoutY="604.0" mnemonicParsing="false" onAction="#cancelSpeciesInfo" text="Cancelar" />
+                              <TextField fx:id="scientificNameSpecies_tf" layoutX="28.0" layoutY="129.0" prefHeight="36.0" prefWidth="570.0" />
+                              <Label layoutX="27.0" layoutY="98.0" text="Nombre científico: " />
+                              <TextField fx:id="commonNameSpecies_tf" layoutX="28.0" layoutY="216.0" prefHeight="36.0" prefWidth="570.0" />
+                              <Label layoutX="30.0" layoutY="185.0" text="Nombre común: " />
+                              <Label layoutX="33.0" layoutY="436.0" text="Fecha de extinción: " />
+                              <Label layoutX="392.0" layoutY="438.0" text="Época de vida: " />
+                              <TextField fx:id="periodOfLife_tf" layoutX="389.0" layoutY="472.0" prefHeight="36.0" prefWidth="195.0" />
+                              <TextField fx:id="extinctionDate_tf" layoutX="32.0" layoutY="480.0" prefHeight="36.0" prefWidth="195.0" />
+                           </children></AnchorPane>
+                        <AnchorPane layoutX="709.0" layoutY="-1.0" prefHeight="677.0" prefWidth="580.0" styleClass="tableViewTab">
+                           <children>
+                              <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Ver registros" />
+                              <ScrollPane layoutX="12.0" layoutY="108.0" prefHeight="481.0" prefWidth="530.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="512.0">
+                                       <children>
+                                          <TableView fx:id="speciesRegister_tv" prefHeight="456.0" prefWidth="510.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                              <Button fx:id="speciesDelete_btn" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deleteSpeciesInfo" text="Eliminar" />
+                              <Button fx:id="speciesEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#editSpeciesInfo" text="Editar" />
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Especies" />
+                        <Separator layoutX="-1.0" layoutY="538.0" prefHeight="11.0" prefWidth="669.0" />
+                        <Label layoutX="27.0" layoutY="271.0" text="Descripción:" />
+                        <TextArea fx:id="speciesDescription_ta" layoutX="27.0" layoutY="302.0" prefHeight="129.0" prefWidth="569.0" />
+                        <Label fx:id="collectionsWarning_lb1" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="554.0" prefHeight="31.0" prefWidth="553.0" text="WARINIGG" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Temáticas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="contentTab">
+                           <children>
+                              <Button fx:id="themesCancel_btn" layoutX="444.0" layoutY="604.0" mnemonicParsing="false" onAction="#cancelThemesInfo" text="Cancelar" />
+                              <Button fx:id="themesSave_btn" layoutX="45.0" layoutY="604.0" mnemonicParsing="false" onAction="#saveThemesInfo" text="Guardar" />
+                              <Label layoutX="27.0" layoutY="98.0" text="Nombre: " />
+                              <TextField fx:id="themesName_tf" layoutX="28.0" layoutY="129.0" prefHeight="36.0" prefWidth="570.0" />
+                              <TextArea fx:id="themesDescription_ta" layoutX="28.0" layoutY="216.0" prefHeight="200.0" prefWidth="569.0" />
+                              <Label layoutX="30.0" layoutY="185.0" text="Descripción:" />
+                              <TextField fx:id="themesPeriod_tf" layoutX="35.0" layoutY="458.0" prefHeight="36.0" prefWidth="156.0" />
+                              <Label layoutX="35.0" layoutY="418.0" text="Época ambientada:" />
+                           </children></AnchorPane>
+                        <AnchorPane layoutX="709.0" layoutY="-1.0" prefHeight="677.0" prefWidth="580.0" styleClass="tableViewTab">
+                           <children>
+                              <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Ver registros" />
+                              <ScrollPane layoutX="12.0" layoutY="108.0" prefHeight="481.0" prefWidth="530.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="512.0">
+                                       <children>
+                                          <TableView fx:id="themesRegister_tv" prefHeight="456.0" prefWidth="510.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                              <Button fx:id="themesEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#ediTthemesInfo" text="Editar" />
+                              <Button fx:id="themesDelete_btn" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deleteThemesInfo" text="Eliminar" />
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Temáticas" />
+                        <Separator layoutX="1.0" layoutY="538.0" prefHeight="11.0" prefWidth="669.0" />
+                        <Label fx:id="themesWarning_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="554.0" prefHeight="31.0" prefWidth="553.0" text="WARINIGG" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Precios y Tarifas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="709.0" layoutY="-1.0" prefHeight="677.0" prefWidth="580.0" styleClass="tableViewTab">
+                           <children>
+                              <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Ver registros" />
+                              <ScrollPane layoutX="12.0" layoutY="108.0" prefHeight="481.0" prefWidth="530.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="512.0">
+                                       <children>
+                                          <TableView fx:id="pricesAndRates_tv" prefHeight="456.0" prefWidth="510.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                              <Button fx:id="pricesAndRatesDelete_btn" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deletePricesAndRatesInfo" text="Eliminar" />
+                              <Button fx:id="pricesAndRatesEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#editPricesAndRatesInfo" text="Editar" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="contentTab">
+                           <children>
+                              <Button fx:id="pricesAndRatesCancel_btn" layoutX="444.0" layoutY="604.0" mnemonicParsing="false" onAction="#cancelPricesAndRatesInfo" text="Cancelar" />
+                              <Button fx:id="pricesAndRatesSave_btn" layoutX="45.0" layoutY="604.0" mnemonicParsing="false" onAction="#savePricesAndRatesInfo" text="Guardar" />
+                              <Label layoutX="27.0" layoutY="98.0" text="Precio general:" />
+                              <TextField fx:id="generalPrice_tf" layoutX="28.0" layoutY="129.0" prefHeight="36.0" prefWidth="570.0" />
+                              <Label layoutX="31.0" layoutY="185.0" text="Precio especial (domingos): " />
+                              <TextField fx:id="specialPrice_tf" layoutX="28.0" layoutY="216.0" prefHeight="36.0" prefWidth="570.0" />
+                              <ChoiceBox fx:id="cardType_cb" layoutX="395.0" layoutY="302.0" prefHeight="24.0" prefWidth="203.0" />
+                              <Label layoutX="405.0" layoutY="271.0" text="Tipo de tarjeta: " />
+                              <TextField fx:id="commissions_tf" layoutX="28.0" layoutY="302.0" prefHeight="36.0" prefWidth="191.0" />
+                              <Label layoutX="27.0" layoutY="271.0" text="Comisiones: " />
+                           </children></AnchorPane>
+                        <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Precios y Tarifas" />
+                        <Separator layoutX="-1.0" layoutY="538.0" prefHeight="11.0" prefWidth="669.0" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

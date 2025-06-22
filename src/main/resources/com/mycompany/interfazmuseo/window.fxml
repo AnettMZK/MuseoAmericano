@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1500.0" stylesheets="@../../../styles/window.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.interfazmuseo.WindowController">
+   <right>
+      <AnchorPane fx:id="mainMenu_ap" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="46.0" fitWidth="151.0" layoutX="26.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/AMONHlogo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="20.0" layoutY="723.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/InstaLogo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="61.0" layoutY="723.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/facebookLogo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="102.0" layoutY="729.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/youtubeLogo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="147.0" layoutY="723.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/xLogo.png" />
+               </image>
+            </ImageView>
+            <VBox layoutX="9.0" layoutY="216.0" prefHeight="390.0" prefWidth="186.0">
+               <children>
+                  <Button fx:id="maintenance_btn" mnemonicParsing="false" onAction="#maintenceOnAction" text="Mantenimientos" />
+                  <Button fx:id="Tickets_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ticketsOnAction" text="Entradas" />
+                  <Button fx:id="Rating_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#ratingOnAction" text="Valoración" />
+                  <Button fx:id="report_btn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" onAction="#reportOnAction" text="Reportes" />
+               </children>
+            </VBox>
+         </children></AnchorPane>
+   </right>
+   <center>
+      <AnchorPane fx:id="mainContent_ap" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

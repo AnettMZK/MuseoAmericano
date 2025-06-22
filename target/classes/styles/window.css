@@ -1,0 +1,42 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+@font-face {   
+    font-family: "Bodoni Moda 9pt";
+    src: url("../fonts/BodoniModa.ttf");
+}
+
+AnchorPane {
+    -fx-background-color: #d6d2c6;
+}
+
+VBox{ 
+    -fx-spacing: 70;
+}
+
+#mainMenu_ap {
+    -fx-background-color: #353331;
+}
+
+Button {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 20px;
+    -fx-text-fill: #776b54;
+    -fx-background-color: #353331;
+}
+
+.button:pressed {
+    -fx-background-color: #353331;
+    -fx-text-fill: #ece9e1;
+}
+
+Label {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 50px;
+    -fx-text-fill: #edeae2;
+}

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="770.0" prefWidth="1300.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.interfazmuseo.TicketsController">
+    <stylesheets>
+        <URL value="@/styles/tickets.css" />
+    </stylesheets>
+   <children>
+      <TabPane layoutX="-3.0" prefHeight="770.0" prefWidth="1309.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Comprar Entrada">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="50.0" layoutY="51.0" prefHeight="272.0" prefWidth="561.0" styleClass="contentTab">
+                           <children>
+                              <Label layoutX="15.0" layoutY="12.0" text="Nombre: ">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="visitorsName_tf" layoutX="15.0" layoutY="50.0" prefHeight="27.0" prefWidth="244.0" />
+                              <ChoiceBox fx:id="cardType_cb" layoutX="348.0" layoutY="42.0" prefHeight="29.0" prefWidth="156.0" />
+                              <Label layoutX="353.0" layoutY="12.0" text="Tipo de tarjeta">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="museumType_cb" layoutX="15.0" layoutY="123.0" prefHeight="29.0" prefWidth="156.0" />
+                              <Label layoutX="20.0" layoutY="93.0" text="Museo">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="353.0" layoutY="115.0" text="Disponibilidad">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="availability_dp" layoutX="338.0" layoutY="153.0" prefHeight="43.0" prefWidth="176.0" />
+                           </children>
+                        </AnchorPane>
+                        <TableView fx:id="shoppingTable_tv" layoutX="54.0" layoutY="395.0" prefHeight="279.0" prefWidth="785.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                        <AnchorPane layoutX="890.0" layoutY="44.0" prefHeight="272.0" prefWidth="294.0" styleClass="contentTab">
+                           <children>
+                              <Button fx:id="buy_btn" layoutX="98.0" layoutY="224.0" mnemonicParsing="false" onAction="#buyTickets" text="Comprar" />
+                              <Separator layoutX="15.0" layoutY="165.0" prefHeight="0.0" prefWidth="243.0" style="-fx-background-color: #000000;" />
+                              <Label layoutX="12.0" layoutY="174.0" text="Total a cancelar">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="111.0" layoutY="-1.0" text="Carrito">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="12.0" layoutY="123.0" text="IVA">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="12.0" layoutY="83.0" text="Exhibición">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="12.0" layoutY="44.0" text="Entrada">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="ticketPrice_lb" layoutX="244.0" layoutY="44.0" text="0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="IVA_lb" layoutX="244.0" layoutY="123.0" text="0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="totalTicket_lb" layoutX="244.0" layoutY="174.0" text="0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Button fx:id="add_btn" layoutX="71.0" layoutY="269.0" mnemonicParsing="false" onAction="#addToCard" prefHeight="33.0" prefWidth="115.0" text="Agregar" />
+                        <Label layoutX="227.0" layoutY="22.0" text="Datos del visitante">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Validar Entrada">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="460.0" layoutY="604.0" prefHeight="24.0" prefWidth="336.0" styleClass="textStyle" text="Con este código QR tendrá acceso a nuestras " />
+                        <Label layoutX="455.0" layoutY="622.0" prefHeight="24.0" prefWidth="354.0" styleClass="textStyle" text="instalaciones, por favor guarde la información" />
+                        <Label layoutX="749.0" layoutY="65.0" text="Salas disponibles" />
+                        <ImageView fx:id="exhibitionImage_iv" fitHeight="364.0" fitWidth="270.0" layoutX="315.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/exposicionPrueba.jpeg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="availableRooms_tv" layoutX="628.0" layoutY="108.0" prefHeight="279.0" prefWidth="445.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label fx:id="dateOfVisit_lb" layoutX="353.0" layoutY="204.0" styleClass="textInfo" text="30 DE MAYO" />
+                        <Label fx:id="museumInfo_lb" layoutX="320.0" layoutY="238.0" styleClass="textInfo" text="Museo de Historia" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

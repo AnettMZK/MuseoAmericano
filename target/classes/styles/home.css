@@ -1,0 +1,39 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 4 jun 2025, 20:48:59
+    Author     : PC
+*/
+
+.mainFxmlClass {
+
+}
+
+@font-face { 
+    font-family: "Bodoni Moda 9pt";
+    src: url("../fonts/BodoniModa.ttf");
+}
+
+Label {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 50px;
+    -fx-text-fill: #edeae2;
+}
+
+AnchorPane {
+    -fx-background-color: #353331;
+}
+
+VBox{ 
+    -fx-spacing: 70;
+}
+
+Button {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 25px;
+    -fx-text-fill: #776b54;
+    -fx-background-color: #353331;
+   
+}
