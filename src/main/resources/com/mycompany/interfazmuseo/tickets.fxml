@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.interfazmuseo.TicketsController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1300.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.interfazmuseo.TicketsController">
    <tabs>
       <Tab text="Comprar Entrada">
          <content>
@@ -47,12 +47,13 @@
                            </font>
                         </Label>
                         <DatePicker fx:id="availability_dp" layoutX="338.0" layoutY="123.0" prefHeight="29.0" prefWidth="176.0" />
-                        <Label layoutX="15.0" layoutY="165.0" text="Tipo de entrada">
+                        <Label layoutX="347.0" layoutY="175.0" text="Tipo de Entrada">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="priceType_cb" layoutX="15.0" layoutY="195.0" prefHeight="29.0" prefWidth="244.0" />
+                        <!-- New elements added in the top-right corner -->
+                        <ChoiceBox fx:id="priceType_cb" layoutX="351.0" layoutY="226.0" prefHeight="29.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
                   <TableView fx:id="shoppingTable_tv" layoutX="54.0" layoutY="450.0" prefHeight="279.0" prefWidth="785.0">
@@ -79,7 +80,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="12.0" layoutY="199.0" text="IVA (5%)">
+                        <Label layoutX="12.0" layoutY="199.0" text="IVA">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -125,31 +126,11 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="740.0" prefWidth="1300.0">
                <children>
-                  <Label layoutX="50.0" layoutY="51.0" text="Código QR: ">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="qrCode_tf" layoutX="150.0" layoutY="51.0" prefHeight="27.0" prefWidth="244.0" />
-                  <Button fx:id="validate_btn" layoutX="400.0" layoutY="51.0" mnemonicParsing="false" onAction="#validateTicket" text="Validar" />
-                  <Label layoutX="50.0" layoutY="100.0" text="Detalles de la Entrada">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="museumInfo_lb" layoutX="50.0" layoutY="130.0" styleClass="textInfo" text="Museo: N/A" />
-                  <Label fx:id="dateOfVisit_lb" layoutX="50.0" layoutY="160.0" styleClass="textInfo" text="Fecha: N/A" />
-                  <Label fx:id="visitorName_lb" layoutX="50.0" layoutY="190.0" styleClass="textInfo" text="Visitante: N/A" />
                   <ImageView fx:id="exhibitionImage_iv" fitHeight="364.0" fitWidth="270.0" layoutX="50.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/exposicionPrueba.jpeg" />
                      </image>
                   </ImageView>
-                  <Label layoutX="628.0" layoutY="51.0" text="Salas disponibles">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
                   <TableView fx:id="availableRooms_tv" layoutX="628.0" layoutY="100.0" prefHeight="600.0" prefWidth="600.0">
                      <columns>
                         <TableColumn prefWidth="300.0" text="Nombre Sala" />
@@ -157,6 +138,17 @@
                      </columns>
                   </TableView>
                   <Label layoutX="460.0" layoutY="700.0" prefHeight="24.0" prefWidth="336.0" styleClass="textStyle" text="Con este código QR tendrá acceso a nuestras instalaciones" />
+                  <!-- New elements added in the top-left corner -->
+                  <Label layoutX="33.0" layoutY="48.0" text="Código QR: ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="qrCode_tf" layoutX="150.0" layoutY="50.0" prefHeight="27.0" prefWidth="244.0" />
+                  <Button fx:id="validate_btn" layoutX="400.0" layoutY="50.0" mnemonicParsing="false" onAction="#validateTicket" text="Validar" />
+                  <Label fx:id="museumInfo_lb" layoutX="50.0" layoutY="130.0" styleClass="textInfo" text="Museo: N/A" />
+                  <Label fx:id="dateOfVisit_lb" layoutX="50.0" layoutY="160.0" styleClass="textInfo" text="Fecha: N/A" />
+                  <Label fx:id="visitorName_lb" layoutX="50.0" layoutY="190.0" styleClass="textInfo" text="Visitante: N/A" />
                </children>
             </AnchorPane>
          </content>
