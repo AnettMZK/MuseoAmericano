@@ -1,27 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistence;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-/**
- *
- * @author PC
- */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "mu_comision")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "MuComision.findAll", query = "SELECT m FROM MuComision m"),
-    @javax.persistence.NamedQuery(name = "MuComision.findByIdComision", query = "SELECT m FROM MuComision m WHERE m.idComision = :idComision"),
-    @javax.persistence.NamedQuery(name = "MuComision.findByComision", query = "SELECT m FROM MuComision m WHERE m.comision = :comision"),
-    @javax.persistence.NamedQuery(name = "MuComision.findByMontoFinal", query = "SELECT m FROM MuComision m WHERE m.montoFinal = :montoFinal")})
+@Entity
+@Table(name = "mu_comision")
+@NamedQueries({
+    @NamedQuery(name = "MuComision.findAll", query = "SELECT m FROM MuComision m"),
+    @NamedQuery(name = "MuComision.findByIdComision", query = "SELECT m FROM MuComision m WHERE m.idComision = :idComision"),
+    @NamedQuery(name = "MuComision.findByComision", query = "SELECT m FROM MuComision m WHERE m.comision = :comision"),
+    @NamedQuery(name = "MuComision.findByMontoFinal", query = "SELECT m FROM MuComision m WHERE m.montoFinal = :montoFinal")
+})
 public class MuComision implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @javax.persistence.Basic(optional = false)
     @javax.persistence.Column(name = "id_comision")
     private Integer idComision;
@@ -29,8 +31,8 @@ public class MuComision implements Serializable {
     private String comision;
     @javax.persistence.Column(name = "monto_final")
     private Integer montoFinal;
-    @javax.persistence.JoinColumn(name = "id_transaccion", referencedColumnName = "id_transaccion")
-    @javax.persistence.ManyToOne(fetch = javax.persistence.FetchType.LAZY)
+    @JoinColumn(name = "id_transaccion", referencedColumnName = "id_transaccion")
+    @ManyToOne(fetch = javax.persistence.FetchType.LAZY)
     private MuTransaccion idTransaccion;
 
     public MuComision() {
@@ -81,7 +83,6 @@ public class MuComision implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MuComision)) {
             return false;
         }
@@ -96,5 +97,4 @@ public class MuComision implements Serializable {
     public String toString() {
         return "persistence.MuComision[ idComision=" + idComision + " ]";
     }
-    
 }

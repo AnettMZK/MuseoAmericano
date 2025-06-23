@@ -1,16 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistence;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author PC
- */
+
 @javax.persistence.Entity
 @javax.persistence.Table(name = "mu_especie")
 @javax.persistence.NamedQueries({
@@ -33,8 +26,7 @@ public class MuEspecie implements Serializable {
     @javax.persistence.Column(name = "nombre_comun")
     private String nombreComun;
     @javax.persistence.Column(name = "fecha_extincion")
-    @javax.persistence.Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaExtincion;
+    private String fechaExtincion;
     @javax.persistence.Column(name = "epoca")
     private String epoca;
     @javax.persistence.Lob
@@ -75,11 +67,11 @@ public class MuEspecie implements Serializable {
         this.nombreComun = nombreComun;
     }
 
-    public Date getFechaExtincion() {
+    public String getFechaExtincion() {
         return fechaExtincion;
     }
 
-    public void setFechaExtincion(Date fechaExtincion) {
+    public void setFechaExtincion(String fechaExtincion) {
         this.fechaExtincion = fechaExtincion;
     }
 

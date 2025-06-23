@@ -23,7 +23,6 @@ persistence\MuTematicas.class
 com\mycompany\interfazmuseo\MaintenanceController.class
 persistence\MuEntradas.class
 controllers\MuPreciosJpaController.class
-com\mycompany\interfazmuseo\RatingController$1.class
 persistence\MuFichas.class
 com\mycompany\interfazmuseo\TicketsController.class
 com\mycompany\interfazmuseo\App.class

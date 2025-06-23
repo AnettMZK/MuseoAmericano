@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controllers;
 
 import java.util.Collection;
@@ -13,10 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import persistence.MuMuseos;
 
-/**
- *
- * @author PC
- */
+
 public class MuMuseosJpaController {
 
     private EntityManagerFactory emf = null;

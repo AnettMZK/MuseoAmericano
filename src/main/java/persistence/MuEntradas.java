@@ -1,48 +1,49 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistence;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- *
- * @author PC
- */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "mu_entradas")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "MuEntradas.findAll", query = "SELECT m FROM MuEntradas m"),
-    @javax.persistence.NamedQuery(name = "MuEntradas.findByIdEntrada", query = "SELECT m FROM MuEntradas m WHERE m.idEntrada = :idEntrada"),
-    @javax.persistence.NamedQuery(name = "MuEntradas.findByNombreCliente", query = "SELECT m FROM MuEntradas m WHERE m.nombreCliente = :nombreCliente"),
-    @javax.persistence.NamedQuery(name = "MuEntradas.findByFecha", query = "SELECT m FROM MuEntradas m WHERE m.fecha = :fecha"),
-    @javax.persistence.NamedQuery(name = "MuEntradas.findByCodigoQr", query = "SELECT m FROM MuEntradas m WHERE m.codigoQr = :codigoQr"),
-    @javax.persistence.NamedQuery(name = "MuEntradas.findByPrecioTotal", query = "SELECT m FROM MuEntradas m WHERE m.precioTotal = :precioTotal")})
+@Entity
+@Table(name = "mu_entradas")
+@NamedQueries({
+    @NamedQuery(name = "MuEntradas.findAll", query = "SELECT m FROM MuEntradas m"),
+    @NamedQuery(name = "MuEntradas.findByIdEntrada", query = "SELECT m FROM MuEntradas m WHERE m.idEntrada = :idEntrada"),
+    @NamedQuery(name = "MuEntradas.findByNombreCliente", query = "SELECT m FROM MuEntradas m WHERE m.nombreCliente = :nombreCliente"),
+    @NamedQuery(name = "MuEntradas.findByFecha", query = "SELECT m FROM MuEntradas m WHERE m.fecha = :fecha"),
+    @NamedQuery(name = "MuEntradas.findByCodigoQr", query = "SELECT m FROM MuEntradas m WHERE m.codigoQr = :codigoQr"),
+    @NamedQuery(name = "MuEntradas.findByPrecioTotal", query = "SELECT m FROM MuEntradas m WHERE m.precioTotal = :precioTotal")
+})
 public class MuEntradas implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @javax.persistence.Basic(optional = false)
     @javax.persistence.Column(name = "id_entrada")
     private Integer idEntrada;
     @javax.persistence.Column(name = "nombre_cliente")
     private String nombreCliente;
     @javax.persistence.Column(name = "fecha")
-    @javax.persistence.Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     @javax.persistence.Column(name = "codigo_qr")
     private String codigoQr;
     @javax.persistence.Column(name = "precio_total")
     private Integer precioTotal;
-    @javax.persistence.JoinColumn(name = "id_museo", referencedColumnName = "id_museo")
-    @javax.persistence.ManyToOne(fetch = javax.persistence.FetchType.LAZY)
+    @JoinColumn(name = "id_museo", referencedColumnName = "id_museo")
+    @ManyToOne(fetch = javax.persistence.FetchType.LAZY)
     private MuMuseos idMuseo;
-    @javax.persistence.OneToMany(mappedBy = "idEntrada", fetch = javax.persistence.FetchType.LAZY)
-    private Collection<MuTransaccion> muTransaccionCollection;
 
     public MuEntradas() {
     }
@@ -99,14 +100,6 @@ public class MuEntradas implements Serializable {
         this.idMuseo = idMuseo;
     }
 
-    public Collection<MuTransaccion> getMuTransaccionCollection() {
-        return muTransaccionCollection;
-    }
-
-    public void setMuTransaccionCollection(Collection<MuTransaccion> muTransaccionCollection) {
-        this.muTransaccionCollection = muTransaccionCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -116,7 +109,6 @@ public class MuEntradas implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MuEntradas)) {
             return false;
         }
@@ -131,5 +123,4 @@ public class MuEntradas implements Serializable {
     public String toString() {
         return "persistence.MuEntradas[ idEntrada=" + idEntrada + " ]";
     }
-    
 }

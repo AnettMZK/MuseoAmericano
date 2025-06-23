@@ -1,11 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.interfazmuseo;
 
+import controllers.MuColeccionesJpaController;
+import controllers.MuEspecieJpaController;
 import controllers.MuMuseosJpaController;
+import controllers.MuPreciosJpaController;
 import controllers.MuSalasJpaController;
+import controllers.MuTematicasJpaController;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -34,14 +34,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import persistence.MuColecciones;
+import persistence.MuEspecie;
 import persistence.MuMuseos;
+import persistence.MuPrecios;
 import persistence.MuSalas;
+import persistence.MuTematicas;
 
-/**
- * FXML Controller class
- *
- * @author PC
- */
+
 public class MaintenanceController implements Initializable {
 
     private String Bandera = "NUEVO";
@@ -57,13 +57,13 @@ public class MaintenanceController implements Initializable {
     @FXML
     private TableView<MuSalas> roomsRegister_tv;
     @FXML
-    private TableView<?> collectionsRegister_tv;
+    private TableView<MuColecciones> collectionsRegister_tv;
     @FXML
-    private TableView<?> speciesRegister_tv;
+    private TableView<MuEspecie> speciesRegister_tv;
     @FXML
-    private TableView<?> themesRegister_tv;
+    private TableView<MuTematicas> themesRegister_tv;
     @FXML
-    private TableView<?> pricesAndRates_tv;
+    private TableView<MuPrecios> pricesAndRates_tv;
     @FXML
     private TextField museumName_tf;
     @FXML
@@ -156,36 +156,56 @@ public class MaintenanceController implements Initializable {
     private TextField themesPeriod_tf;
     @FXML
     private Label themesWarning_lb;
-    @FXML
-    private TextField generalPrice_tf;
-    @FXML
-    private TextField specialPrice_tf;
-    @FXML
-    private ChoiceBox<?> cardType_cb;
-    @FXML
-    private TextField commissions_tf;
 
     private MuMuseosJpaController MuseumJpa = new MuMuseosJpaController();
-    private  MuSalasJpaController MuSalaJpa = new  MuSalasJpaController();
+    private MuSalasJpaController MuSalaJpa = new MuSalasJpaController();
+    private MuColeccionesJpaController MuColecionesJpa = new MuColeccionesJpaController();
+    private MuEspecieJpaController MuEspecieJpa = new MuEspecieJpaController();
+    private MuTematicasJpaController MuTematicasJpa = new MuTematicasJpaController();
+    private MuPreciosJpaController MuPrecioJpa = new MuPreciosJpaController();
+
     private MuMuseos selectedMuseum;
     private MuSalas selectedRoom;
+    private MuColecciones selectedCollection;
+    private MuEspecie selectedSpecie;
+    private MuTematicas selectedThems;
+    private MuPrecios selectedPrice;
+    @FXML
+    private TextField namePrice_tf;
+    @FXML
+    private TextField amountPrice_tf;
 
-    /**
-     * Initializes the controller class.
-     */
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         uploadMuseumData();
+        uploadRoomsData();
+        uploadCollectionData();
+        uploadSpeciesData();
+        uploadThemesData();
+        uploadPricesAndRatesData();
         typeMuseum_cb.getItems().addAll("Arte", "Historia", "Musical", "Militar");
         // TODO
 
         setDoubleClickSelectionHandler(museumRegister_tv, item -> {
             selectedMuseum = item;
         });
-         setDoubleClickSelectionHandler(roomsRegister_tv, item -> {
+        setDoubleClickSelectionHandler(roomsRegister_tv, item -> {
             selectedRoom = item;
         });
-         
+        setDoubleClickSelectionHandler(collectionsRegister_tv, item -> {
+            selectedCollection = item;
+        });
+        setDoubleClickSelectionHandler(speciesRegister_tv, item -> {
+            selectedSpecie = item;
+        });
+        setDoubleClickSelectionHandler(themesRegister_tv, item -> {
+            selectedThems = item;
+        });
+        setDoubleClickSelectionHandler(pricesAndRates_tv, item -> {
+            selectedPrice = item;
+        });
+
     }
 
     /* GESTION DE MUSEO */
@@ -350,7 +370,7 @@ public class MaintenanceController implements Initializable {
     /* GESTION DE SALAS */
     @FXML
     private void saveRoomInfo(ActionEvent event) {
-        
+
         if (roomName_tf.getText().isEmpty() || roomDescription_ta.getText().isEmpty()) {
 
             Alert mensaje = new Alert(Alert.AlertType.WARNING);
@@ -364,41 +384,32 @@ public class MaintenanceController implements Initializable {
                 MuSalas sala = new MuSalas();
                 sala.setNombre(roomName_tf.getText());
                 sala.setDescripcion(roomDescription_ta.getText());
-       
 
                 MuSalaJpa.create(sala);
-                uploadMuseumData();
+                uploadRoomsData();
 
                 Alert mensaje = new Alert(Alert.AlertType.CONFIRMATION);
                 mensaje.setTitle("Exito");
-                mensaje.setContentText("Museo creado con exito");
+                mensaje.setContentText("Sala creada con exito");
                 mensaje.showAndWait();
             }
 
             if (Bandera.equals("EDITAR")) {
 
-                selectedMuseum.setNombre(museumName_tf.getText());
-                selectedMuseum.setUbicacion(museumLocation_tf.getText());
-                selectedMuseum.setNombreDirector(managername_tf.getText());
-                selectedMuseum.setSitioWeb(museumWebURL_tf.getText());
-                //selectedMuseum.setFechaFundacion(date);
-                //selectedMuseum.setTipo(typeSelected);
+                selectedRoom.setNombre(roomName_tf.getText());
+                selectedRoom.setDescripcion(roomDescription_ta.getText());
 
-                MuseumJpa.edit(selectedMuseum);
-                uploadMuseumData();
+                MuSalaJpa.edit(selectedRoom);
+                uploadRoomsData();
 
                 Alert mensaje = new Alert(Alert.AlertType.CONFIRMATION);
                 mensaje.setTitle("Exito");
-                mensaje.setContentText("Museo editado con exito");
+                mensaje.setContentText("Sala editada con exito");
                 mensaje.showAndWait();
             }
 
-            museumName_tf.clear();
-            museumLocation_tf.clear();
-            managername_tf.clear();
-            museumWebURL_tf.clear();
-            foundationDate_dp.setValue(null);
-            typeMuseum_cb.setValue(null);
+            roomName_tf.clear();
+            roomDescription_ta.clear();
 
             Bandera = "NUEVO";
         }
@@ -406,94 +417,546 @@ public class MaintenanceController implements Initializable {
 
     @FXML
     private void editRoomInfo(ActionEvent event) {
+        if (selectedRoom != null) {
+            roomName_tf.setText(selectedRoom.getNombre());
+            roomDescription_ta.setText(selectedRoom.getDescripcion());
+            Bandera = "EDITAR";
+        }
+
     }
 
     @FXML
     private void deleteRoomInfo(ActionEvent event) {
+
+        if (selectedRoom != null) {
+
+            Alert mensaje = new Alert(Alert.AlertType.INFORMATION);
+            mensaje.setTitle("Solicitud de confirmacion");
+            mensaje.setContentText("Estas seguro que deseas eliminar la informacion de " + selectedRoom.getNombre());
+
+            ButtonType si = new ButtonType("SI");
+            ButtonType no = new ButtonType("NO");
+
+            mensaje.getButtonTypes().setAll(si, no);
+
+            Optional<ButtonType> resultado = mensaje.showAndWait();
+
+            if (resultado.isPresent()) {
+                if (resultado.get() == si) {
+
+                    MuSalaJpa.delete(selectedRoom);
+                    uploadRoomsData();
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Exito");
+                    alert.setContentText("Sala eliminada con exito");
+                    alert.showAndWait();
+                }
+            }
+            if (resultado.get() == no) {
+                System.out.println("La sala no fue eliminada");
+            }
+        }
     }
 
     @FXML
     private void cancelRoomInfo(ActionEvent event) {
+        roomName_tf.clear();
+        roomDescription_ta.clear();
     }
 
     public void uploadRoomsData() {
+
+        roomsRegister_tv.getColumns().clear();
+
+        TableColumn<MuSalas, String> nombre = new TableColumn<>("Nombre");
+        nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+
+        TableColumn<MuSalas, String> descripcion = new TableColumn<>("Descripcion");
+        descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+
+        roomsRegister_tv.getColumns().addAll(nombre, descripcion);
+
+        Collection salas = MuSalaJpa.findSalaEntities();
+        ObservableList<MuSalas> salasFX = FXCollections.observableArrayList(salas);
+        roomsRegister_tv.setItems(salasFX);
     }
 
     /* GESTION DE COLECCIONES */
     @FXML
     private void deleteCollectionsInfo(ActionEvent event) {
+        if (selectedCollection != null) {
+
+            Alert mensaje = new Alert(Alert.AlertType.INFORMATION);
+            mensaje.setTitle("Solicitud de confirmacion");
+            mensaje.setContentText("Estas seguro que deseas eliminar la informacion de " + selectedCollection.getNombre());
+
+            ButtonType si = new ButtonType("SI");
+            ButtonType no = new ButtonType("NO");
+
+            mensaje.getButtonTypes().setAll(si, no);
+
+            Optional<ButtonType> resultado = mensaje.showAndWait();
+
+            if (resultado.isPresent()) {
+                if (resultado.get() == si) {
+
+                    MuColecionesJpa.delete(selectedCollection);
+                    uploadCollectionData();
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Exito");
+                    alert.setContentText("Coleccion eliminada con exito");
+                    alert.showAndWait();
+                }
+            }
+            if (resultado.get() == no) {
+                System.out.println("La coleccion no fue eliminada");
+            }
+        }
     }
 
     @FXML
     private void editCollectionsnfo(ActionEvent event) {
+
+        if (selectedCollection != null) {
+            collectionsName_tf.setText(selectedCollection.getNombre());
+            collectionsDescription_ta.setText(selectedCollection.getDescripcion());
+            collectionsCentury_tf.setText(selectedCollection.getSiglo());
+            Bandera = "EDITAR";
+        }
+
     }
 
     @FXML
     private void cancelCollectionsInfo(ActionEvent event) {
+        collectionsName_tf.clear();
+        collectionsDescription_ta.clear();
+        collectionsCentury_tf.clear();
     }
 
     @FXML
     private void saveCollectionsInfo(ActionEvent event) {
+
+        if (collectionsName_tf.getText().isEmpty() || collectionsCentury_tf.getText().isEmpty() || collectionsDescription_ta.getText().isEmpty()) {
+
+            Alert mensaje = new Alert(Alert.AlertType.WARNING);
+            mensaje.setTitle("CUIDADO");
+            mensaje.setContentText("Ningun dato de las colecciones puede quedar vacio");
+            mensaje.showAndWait();
+
+        } else {
+            if (Bandera.equals("NUEVO")) {
+
+                MuColecciones coleccion = new MuColecciones();
+                coleccion.setNombre(collectionsName_tf.getText());
+                coleccion.setSiglo(collectionsCentury_tf.getText());
+                coleccion.setDescripcion(collectionsDescription_ta.getText());
+
+                MuColecionesJpa.create(coleccion);
+                uploadCollectionData();
+
+                Alert mensaje = new Alert(Alert.AlertType.CONFIRMATION);
+                mensaje.setTitle("Exito");
+                mensaje.setContentText("Coleccion creada con exito");
+                mensaje.showAndWait();
+            }
+
+            if (Bandera.equals("EDITAR")) {
+
+                selectedCollection.setNombre(collectionsName_tf.getText());
+                selectedCollection.setDescripcion(collectionsDescription_ta.getText());
+                selectedCollection.setSiglo(collectionsCentury_tf.getText());
+
+                MuColecionesJpa.edit(selectedCollection);
+                uploadCollectionData();
+
+                Alert mensaje = new Alert(Alert.AlertType.CONFIRMATION);
+                mensaje.setTitle("Exito");
+                mensaje.setContentText("Coleccion editada con exito");
+                mensaje.showAndWait();
+            }
+
+            collectionsName_tf.clear();
+            collectionsDescription_ta.clear();
+            collectionsCentury_tf.clear();
+
+            Bandera = "NUEVO";
+        }
+    }
+
+    public void uploadCollectionData() {
+
+        collectionsRegister_tv.getColumns().clear();
+
+        TableColumn<MuColecciones, String> nombre = new TableColumn<>("Nombre");
+        nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+
+        TableColumn<MuColecciones, String> descripcion = new TableColumn<>("Descripcion");
+        descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+
+        TableColumn<MuColecciones, String> siglo = new TableColumn<>("Siglo");
+        siglo.setCellValueFactory(new PropertyValueFactory<>("siglo"));
+
+        collectionsRegister_tv.getColumns().addAll(nombre, descripcion, siglo);
+
+        Collection coleccion = MuColecionesJpa.findColeccionEntities();
+        ObservableList<MuColecciones> coleccionFX = FXCollections.observableArrayList(coleccion);
+        collectionsRegister_tv.setItems(coleccionFX);
     }
 
     /* GESTION DE ESPECIES */
     @FXML
     private void saveSpeciesInfo(ActionEvent event) {
+        if (scientificNameSpecies_tf.getText().isEmpty() || commonNameSpecies_tf.getText().isEmpty() || speciesDescription_ta.getText().isEmpty() || extinctionDate_tf.getText().isEmpty() || periodOfLife_tf.getText().isEmpty()) {
+
+            Alert mensaje = new Alert(Alert.AlertType.WARNING);
+            mensaje.setTitle("CUIDADO");
+            mensaje.setContentText("Ningun dato de la especie puede quedar vacio");
+            mensaje.showAndWait();
+
+        } else {
+            if (Bandera.equals("NUEVO")) {
+
+                MuEspecie especie = new MuEspecie();
+                especie.setNombreCientifico(scientificNameSpecies_tf.getText());
+                especie.setNombreComun(commonNameSpecies_tf.getText());
+                especie.setDescripcion(speciesDescription_ta.getText());
+                especie.setFechaExtincion(extinctionDate_tf.getText());
+                especie.setEpoca(periodOfLife_tf.getText());
+
+                MuEspecieJpa.create(especie);
+                uploadSpeciesData();
+
+                Alert mensaje = new Alert(Alert.AlertType.CONFIRMATION);
+                mensaje.setTitle("Exito");
+                mensaje.setContentText("Especie creada con exito");
+                mensaje.showAndWait();
+            }
+
+            if (Bandera.equals("EDITAR")) {
+
+                selectedSpecie.setNombreCientifico(scientificNameSpecies_tf.getText());
+                selectedSpecie.setNombreComun(commonNameSpecies_tf.getText());
+                selectedSpecie.setDescripcion(speciesDescription_ta.getText());
+                selectedSpecie.setFechaExtincion(extinctionDate_tf.getText());
+                selectedSpecie.setEpoca(periodOfLife_tf.getText());
+
+                MuEspecieJpa.edit(selectedSpecie);
+                uploadSpeciesData();
+
+                Alert mensaje = new Alert(Alert.AlertType.CONFIRMATION);
+                mensaje.setTitle("Exito");
+                mensaje.setContentText("Especie editada con exito");
+                mensaje.showAndWait();
+            }
+
+            scientificNameSpecies_tf.clear();
+            commonNameSpecies_tf.clear();
+            speciesDescription_ta.clear();
+            extinctionDate_tf.clear();
+            periodOfLife_tf.clear();
+
+            Bandera = "NUEVO";
+        }
     }
 
     @FXML
     private void cancelSpeciesInfo(ActionEvent event) {
+        scientificNameSpecies_tf.clear();
+        commonNameSpecies_tf.clear();
+        speciesDescription_ta.clear();
+        extinctionDate_tf.clear();
+        periodOfLife_tf.clear();
     }
 
     @FXML
     private void deleteSpeciesInfo(ActionEvent event) {
+        if (selectedSpecie != null) {
+
+            Alert mensaje = new Alert(Alert.AlertType.INFORMATION);
+            mensaje.setTitle("Solicitud de confirmacion");
+            mensaje.setContentText("Estas seguro que deseas eliminar la informacion de " + selectedSpecie.getNombreCientifico());
+
+            ButtonType si = new ButtonType("SI");
+            ButtonType no = new ButtonType("NO");
+
+            mensaje.getButtonTypes().setAll(si, no);
+
+            Optional<ButtonType> resultado = mensaje.showAndWait();
+
+            if (resultado.isPresent()) {
+                if (resultado.get() == si) {
+
+                    MuEspecieJpa.delete(selectedSpecie);
+                    uploadSpeciesData();
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Exito");
+                    alert.setContentText("Especie eliminada con exito");
+                    alert.showAndWait();
+                }
+            }
+            if (resultado.get() == no) {
+                System.out.println("La especie no fue eliminada");
+            }
+        }
     }
 
     @FXML
     private void editSpeciesInfo(ActionEvent event) {
+        if (selectedSpecie != null) {
+            scientificNameSpecies_tf.setText(selectedSpecie.getNombreCientifico());
+            commonNameSpecies_tf.setText(selectedSpecie.getNombreComun());
+            speciesDescription_ta.setText(selectedSpecie.getDescripcion());
+            extinctionDate_tf.setText(selectedSpecie.getFechaExtincion());
+            periodOfLife_tf.setText(selectedSpecie.getEpoca());
+            Bandera = "EDITAR";
+        }
     }
 
     public void uploadSpeciesData() {
+
+        speciesRegister_tv.getColumns().clear();
+
+        TableColumn<MuEspecie, String> nombrecienti = new TableColumn<>("Nombre Cientifico");
+        nombrecienti.setCellValueFactory(new PropertyValueFactory<>("nombreCientifico"));
+
+        TableColumn<MuEspecie, String> nombreComun = new TableColumn<>("Nombre Comun");
+        nombreComun.setCellValueFactory(new PropertyValueFactory<>("nombreComun"));
+
+        TableColumn<MuEspecie, String> descripcion = new TableColumn<>("Descripcion");
+        descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+
+        TableColumn<MuEspecie, String> extincion = new TableColumn<>("Fecha de Extincion");
+        extincion.setCellValueFactory(new PropertyValueFactory<>("fechaExtincion"));
+
+        TableColumn<MuEspecie, String> epoca = new TableColumn<>("Epoca de vida");
+        epoca.setCellValueFactory(new PropertyValueFactory<>("epoca"));
+
+        speciesRegister_tv.getColumns().addAll(nombrecienti, nombreComun, descripcion, extincion, epoca);
+
+        Collection especie = MuEspecieJpa.findEspecieEntities();
+        ObservableList<MuEspecie> especieFX = FXCollections.observableArrayList(especie);
+        speciesRegister_tv.setItems(especieFX);
     }
 
     /* GESTION DE TEMAS */
     @FXML
     private void cancelThemesInfo(ActionEvent event) {
+        themesName_tf.clear();
+        themesDescription_ta.clear();
+        themesPeriod_tf.clear();
     }
 
     @FXML
     private void saveThemesInfo(ActionEvent event) {
+        if (themesName_tf.getText().isEmpty() || themesDescription_ta.getText().isEmpty() || themesPeriod_tf.getText().isEmpty()) {
+
+            Alert mensaje = new Alert(Alert.AlertType.WARNING);
+            mensaje.setTitle("CUIDADO");
+            mensaje.setContentText("Ningun dato de la  puede quedar vacio");
+            mensaje.showAndWait();
+
+        } else {
+            if (Bandera.equals("NUEVO")) {
+
+                MuTematicas tematica = new MuTematicas();
+                tematica.setNombre(themesName_tf.getText());
+                tematica.setCaracteristicas(themesDescription_ta.getText());
+                tematica.setEpoca(themesPeriod_tf.getText());
+
+                MuTematicasJpa.create(tematica);
+                uploadThemesData();
+
+                Alert mensaje = new Alert(Alert.AlertType.CONFIRMATION);
+                mensaje.setTitle("Exito");
+                mensaje.setContentText("Tematica creada con exito");
+                mensaje.showAndWait();
+            }
+
+            if (Bandera.equals("EDITAR")) {
+
+                selectedThems.setNombre(themesName_tf.getText());
+                selectedThems.setCaracteristicas(themesDescription_ta.getText());
+                selectedThems.setEpoca(themesPeriod_tf.getText());
+
+                MuTematicasJpa.edit(selectedThems);
+                uploadThemesData();
+
+                Alert mensaje = new Alert(Alert.AlertType.CONFIRMATION);
+                mensaje.setTitle("Exito");
+                mensaje.setContentText("Tematica editada con exito");
+                mensaje.showAndWait();
+            }
+
+            themesName_tf.clear();
+            themesDescription_ta.clear();
+            themesPeriod_tf.clear();
+
+            Bandera = "NUEVO";
+        }
     }
 
     @FXML
     private void ediTthemesInfo(ActionEvent event) {
+        if (selectedThems != null) {
+            themesName_tf.setText(selectedThems.getNombre());
+            themesDescription_ta.setText(selectedThems.getCaracteristicas());
+            themesPeriod_tf.setText(selectedThems.getEpoca());
+            Bandera = "EDITAR";
+        }
     }
 
     @FXML
     private void deleteThemesInfo(ActionEvent event) {
+        if (selectedThems != null) {
+
+            Alert mensaje = new Alert(Alert.AlertType.INFORMATION);
+            mensaje.setTitle("Solicitud de confirmacion");
+            mensaje.setContentText("Estas seguro que deseas eliminar la informacion de " + selectedThems.getNombre());
+
+            ButtonType si = new ButtonType("SI");
+            ButtonType no = new ButtonType("NO");
+
+            mensaje.getButtonTypes().setAll(si, no);
+
+            Optional<ButtonType> resultado = mensaje.showAndWait();
+
+            if (resultado.isPresent()) {
+                if (resultado.get() == si) {
+
+                    MuTematicasJpa.delete(selectedThems);
+                    uploadSpeciesData();
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Exito");
+                    alert.setContentText("Tematica eliminada con exito");
+                    alert.showAndWait();
+                }
+            }
+            if (resultado.get() == no) {
+                System.out.println("La tematica no fue eliminada");
+            }
+        }
     }
 
     public void uploadThemesData() {
+
+        themesRegister_tv.getColumns().clear();
+
+        TableColumn<MuTematicas, String> nombre = new TableColumn<>("Nombre");
+        nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+
+        TableColumn<MuTematicas, String> descripcion = new TableColumn<>("Descripcion");
+        descripcion.setCellValueFactory(new PropertyValueFactory<>("caracteristicas"));
+
+        TableColumn<MuTematicas, String> epoca = new TableColumn<>("Epoca");
+        epoca.setCellValueFactory(new PropertyValueFactory<>("epoca"));
+
+        themesRegister_tv.getColumns().addAll(nombre, descripcion, epoca);
+
+        Collection tematica = MuTematicasJpa.findTematicaEntities();
+        ObservableList<MuTematicas> tematicaFX = FXCollections.observableArrayList(tematica);
+        themesRegister_tv.setItems(tematicaFX);
     }
 
     /* GESTION DE PRECIOS Y TARIFAS */
     @FXML
     private void deletePricesAndRatesInfo(ActionEvent event) {
+        if (selectedPrice != null) {
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro que deseas eliminar este precio?",
+                    ButtonType.YES, ButtonType.NO);
+            alerta.setTitle("Confirmación");
+            alerta.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.YES) {
+                    MuPrecioJpa.delete(selectedPrice);
+                    uploadPricesAndRatesData();
+                    namePrice_tf.clear();
+                    amountPrice_tf.clear();
+                    selectedPrice = null;
+                    Bandera = "NUEVO";
+                }
+            });
+        }
     }
 
     @FXML
     private void editPricesAndRatesInfo(ActionEvent event) {
+        if (selectedPrice != null) {
+            namePrice_tf.setText(selectedPrice.getNombrePrecio());
+            amountPrice_tf.setText(String.valueOf(selectedPrice.getMonto()));
+            Bandera = "EDITAR";
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.WARNING, "Debes seleccionar un precio para editar.");
+            alerta.showAndWait();
+        }
     }
 
     @FXML
     private void cancelPricesAndRatesInfo(ActionEvent event) {
+        namePrice_tf.clear();
+        amountPrice_tf.clear();
+        selectedPrice = null;
+        Bandera = "NUEVO";
     }
 
     @FXML
     private void savePricesAndRatesInfo(ActionEvent event) {
+        String nombre = namePrice_tf.getText();
+        String montoTexto = amountPrice_tf.getText();
+
+        if (nombre.isEmpty() || montoTexto.isEmpty()) {
+            Alert alerta = new Alert(Alert.AlertType.WARNING, "Todos los campos deben estar llenos.");
+            alerta.showAndWait();
+            return;
+        }
+
+        try {
+            int monto = Integer.parseInt(montoTexto);
+
+            if (Bandera.equals("NUEVO")) {
+                persistence.MuPrecios nuevo = new persistence.MuPrecios();
+                nuevo.setNombrePrecio(nombre);
+                nuevo.setMonto(monto);
+                MuPrecioJpa.create(nuevo);
+            } else if (Bandera.equals("EDITAR") && selectedPrice != null) {
+                selectedPrice.setNombrePrecio(nombre);
+                selectedPrice.setMonto(monto);
+                MuPrecioJpa.edit(selectedPrice);
+            }
+
+            uploadPricesAndRatesData();
+            namePrice_tf.clear();
+            amountPrice_tf.clear();
+            Bandera = "NUEVO";
+            selectedPrice = null;
+
+        } catch (NumberFormatException e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR, "El monto debe ser un número válido.");
+            alerta.showAndWait();
+        }
+
     }
 
     public void uploadPricesAndRatesData() {
+         pricesAndRates_tv.getColumns().clear();
+
+        TableColumn<persistence.MuPrecios, Integer> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(new PropertyValueFactory<>("idPrecio"));
+
+        TableColumn<persistence.MuPrecios, String> nameCol = new TableColumn<>("Nombre Precio");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("nombrePrecio"));
+
+        TableColumn<persistence.MuPrecios, Integer> amountCol = new TableColumn<>("Monto");
+        amountCol.setCellValueFactory(new PropertyValueFactory<>("monto"));
+
+        pricesAndRates_tv.getColumns().addAll(idCol, nameCol, amountCol);
+
+        Collection<persistence.MuPrecios> precios = MuPrecioJpa.findPreciosEntities();
+        ObservableList<persistence.MuPrecios> preciosFX = FXCollections.observableArrayList(precios);
+        pricesAndRates_tv.setItems(preciosFX);
+
     }
 
     public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {

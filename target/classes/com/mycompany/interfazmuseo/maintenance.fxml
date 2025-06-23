@@ -273,14 +273,10 @@
                            <children>
                               <Button fx:id="pricesAndRatesCancel_btn" layoutX="444.0" layoutY="604.0" mnemonicParsing="false" onAction="#cancelPricesAndRatesInfo" text="Cancelar" />
                               <Button fx:id="pricesAndRatesSave_btn" layoutX="45.0" layoutY="604.0" mnemonicParsing="false" onAction="#savePricesAndRatesInfo" text="Guardar" />
-                              <Label layoutX="27.0" layoutY="98.0" text="Precio general:" />
-                              <TextField fx:id="generalPrice_tf" layoutX="28.0" layoutY="129.0" prefHeight="36.0" prefWidth="570.0" />
-                              <Label layoutX="31.0" layoutY="185.0" text="Precio especial (domingos): " />
-                              <TextField fx:id="specialPrice_tf" layoutX="28.0" layoutY="216.0" prefHeight="36.0" prefWidth="570.0" />
-                              <ChoiceBox fx:id="cardType_cb" layoutX="395.0" layoutY="302.0" prefHeight="24.0" prefWidth="203.0" />
-                              <Label layoutX="405.0" layoutY="271.0" text="Tipo de tarjeta: " />
-                              <TextField fx:id="commissions_tf" layoutX="28.0" layoutY="302.0" prefHeight="36.0" prefWidth="191.0" />
-                              <Label layoutX="27.0" layoutY="271.0" text="Comisiones: " />
+                              <Label layoutX="27.0" layoutY="98.0" text="Nombre" />
+                              <TextField fx:id="namePrice_tf" layoutX="28.0" layoutY="129.0" prefHeight="36.0" prefWidth="570.0" />
+                              <Label layoutX="31.0" layoutY="185.0" text="Monto" />
+                              <TextField fx:id="amountPrice_tf" layoutX="28.0" layoutY="216.0" prefHeight="36.0" prefWidth="570.0" />
                            </children></AnchorPane>
                         <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Precios y Tarifas" />
                         <Separator layoutX="-1.0" layoutY="538.0" prefHeight="11.0" prefWidth="669.0" />

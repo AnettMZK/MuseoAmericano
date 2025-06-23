@@ -1,41 +1,46 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistence;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- *
- * @author PC
- */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "mu_transaccion")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "MuTransaccion.findAll", query = "SELECT m FROM MuTransaccion m"),
-    @javax.persistence.NamedQuery(name = "MuTransaccion.findByIdTransaccion", query = "SELECT m FROM MuTransaccion m WHERE m.idTransaccion = :idTransaccion"),
-    @javax.persistence.NamedQuery(name = "MuTransaccion.findByTipoTarjeta", query = "SELECT m FROM MuTransaccion m WHERE m.tipoTarjeta = :tipoTarjeta"),
-    @javax.persistence.NamedQuery(name = "MuTransaccion.findByFecha", query = "SELECT m FROM MuTransaccion m WHERE m.fecha = :fecha")})
+@Entity
+@Table(name = "mu_transaccion")
+@NamedQueries({
+    @NamedQuery(name = "MuTransaccion.findAll", query = "SELECT m FROM MuTransaccion m"),
+    @NamedQuery(name = "MuTransaccion.findByIdTransaccion", query = "SELECT m FROM MuTransaccion m WHERE m.idTransaccion = :idTransaccion"),
+    @NamedQuery(name = "MuTransaccion.findByTipoTarjeta", query = "SELECT m FROM MuTransaccion m WHERE m.tipoTarjeta = :tipoTarjeta"),
+    @NamedQuery(name = "MuTransaccion.findByFecha", query = "SELECT m FROM MuTransaccion m WHERE m.fecha = :fecha")
+})
 public class MuTransaccion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @javax.persistence.Basic(optional = false)
     @javax.persistence.Column(name = "id_transaccion")
     private Integer idTransaccion;
     @javax.persistence.Column(name = "tipo_tarjeta")
     private String tipoTarjeta;
     @javax.persistence.Column(name = "fecha")
-    @javax.persistence.Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
-    @javax.persistence.JoinColumn(name = "id_entrada", referencedColumnName = "id_entrada")
-    @javax.persistence.ManyToOne(fetch = javax.persistence.FetchType.LAZY)
+    @JoinColumn(name = "id_entrada", referencedColumnName = "id_entrada")
+    @ManyToOne(fetch = javax.persistence.FetchType.LAZY)
     private MuEntradas idEntrada;
-    @javax.persistence.OneToMany(mappedBy = "idTransaccion", fetch = javax.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "idTransaccion", fetch = javax.persistence.FetchType.LAZY)
     private Collection<MuComision> muComisionCollection;
 
     public MuTransaccion() {
@@ -94,7 +99,6 @@ public class MuTransaccion implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MuTransaccion)) {
             return false;
         }
@@ -109,5 +113,4 @@ public class MuTransaccion implements Serializable {
     public String toString() {
         return "persistence.MuTransaccion[ idTransaccion=" + idTransaccion + " ]";
     }
-    
 }

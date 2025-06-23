@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controllers;
 
 import com.mycompany.interfazmuseo.*;
@@ -13,10 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import persistence.MuSalas;
 
-/**
- *
- * @author PC
- */
+
 public class MuSalasJpaController {
 
     private EntityManagerFactory emf = null;
@@ -25,8 +18,8 @@ public class MuSalasJpaController {
         this.emf = Persistence.createEntityManagerFactory("MuseoAmericano");
     }
 
-    public Collection<MuSalas> findMuseoEntities() {
-        return findMuseoEntities(true, -1, -1);
+    public Collection<MuSalas> findSalaEntities() {
+        return findSalaEntities(true, -1, -1);
     }
 
     public EntityManagerFactory getEmf() {
@@ -34,7 +27,7 @@ public class MuSalasJpaController {
         return emf;
     }
 
-    private Collection<MuSalas> findMuseoEntities(boolean all, int maxResult, int firstResult) {
+    private Collection<MuSalas> findSalaEntities(boolean all, int maxResult, int firstResult) {
         EntityManager em = this.getEmf().createEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -94,20 +87,5 @@ public class MuSalasJpaController {
             }
         }
     }
-    public MuSalas findById(int id) {
-        EntityManager em = this.getEmf().createEntityManager();
-
-        try {
-            MuSalas sala = em.find(MuSalas.class, id);
-            if (sala != null) {
-                em.refresh(sala);
-            }
-            return sala;
-        } finally {
-            em.close();
-        }
-    }
-
-
 
 }

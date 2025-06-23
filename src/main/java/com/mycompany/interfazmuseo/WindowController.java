@@ -1,4 +1,3 @@
-
 package com.mycompany.interfazmuseo;
 
 import java.io.IOException;
@@ -29,9 +28,7 @@ public class WindowController implements Initializable {
     @FXML
     private AnchorPane mainContent_ap;
 
-    /**
-     * Initializes the controller class.
-     */
+    
 
       @Override
     public void initialize(URL url, ResourceBundle rb) {
