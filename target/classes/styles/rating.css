@@ -5,3 +5,64 @@
 .mainFxmlClass {
 
 }
+
+
+Label {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 20px;
+    -fx-text-fill: #353331;
+}
+
+.textStyle {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 30px;
+    -fx-text-fill: #353331; 
+}
+
+Button {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 20px;
+    -fx-text-fill: #edeae2;
+    -fx-background-color: #353331;
+    -fx-background-radius: 10;   
+}
+
+TextArea { 
+-fx-font-family: "Bodoni Moda 9pt";
+
+}
+
+.text-area .content {
+    -fx-background-color: #a19c90;
+    -fx-font-family: "Bodoni Moda 9pt";
+}
+
+.contentAnchorPane {
+    -fx-background-color: #ece9e1;
+    -fx-background-radius: 20px;
+}
+
+.list-view {
+    -fx-background-color: #a19c90;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Bodoni Moda 9pt";
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #353331;
+    -fx-padding: 8px;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.list-cell:selected {
+    -fx-background-color: #353331;
+    -fx-text-fill: #edeae2;
+}
+
+HBox {
+    -fx-spacing: 15px;
+   
+}

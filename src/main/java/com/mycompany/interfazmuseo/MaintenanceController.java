@@ -10,11 +10,15 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,7 +44,6 @@ import persistence.MuMuseos;
 import persistence.MuPrecios;
 import persistence.MuSalas;
 import persistence.MuTematicas;
-
 
 public class MaintenanceController implements Initializable {
 
@@ -174,8 +177,31 @@ public class MaintenanceController implements Initializable {
     private TextField namePrice_tf;
     @FXML
     private TextField amountPrice_tf;
+    @FXML
+    private ChoiceBox<String> filterRoom_cb;
+    @FXML
+    private Button filterRoom_btn;
+    @FXML
+    private ChoiceBox<String> filterCollections_cb;
+    @FXML
+    private Button filterCollections_btn;
+    @FXML
+    private ChoiceBox<String> filterSpecies_cb;
+    @FXML
+    private Button filterSpecie_btn;
+    @FXML
+    private ChoiceBox<String> filterThemes_cb;
+    @FXML
+    private Button filterThemes_btn;
+    @FXML
+    private TextField rangeOne_tf;
+    @FXML
+    private TextField rangeTwo_tf;
+    @FXML
+    private Button filterPrice_btn;
+    @FXML
+    private Button restorePrice_btn;
 
-   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         uploadMuseumData();
@@ -185,6 +211,18 @@ public class MaintenanceController implements Initializable {
         uploadThemesData();
         uploadPricesAndRatesData();
         typeMuseum_cb.getItems().addAll("Arte", "Historia", "Musical", "Militar");
+
+        filterRoom_cb.getItems().addAll("Todos", "Orden alfabético");
+        filterRoom_cb.setValue("Todos");
+
+        filterSpecies_cb.getItems().addAll("Todos", "Orden alfabético");
+        filterSpecies_cb.setValue("Todos");
+
+        filterCollections_cb.getItems().addAll("Todos", "Orden alfabético");
+        filterCollections_cb.setValue("Todos");
+
+        filterThemes_cb.getItems().addAll("Todos", "Orden alfabético");
+        filterThemes_cb.setValue("Todos");
         // TODO
 
         setDoubleClickSelectionHandler(museumRegister_tv, item -> {
@@ -940,7 +978,7 @@ public class MaintenanceController implements Initializable {
     }
 
     public void uploadPricesAndRatesData() {
-         pricesAndRates_tv.getColumns().clear();
+        pricesAndRates_tv.getColumns().clear();
 
         TableColumn<persistence.MuPrecios, Integer> idCol = new TableColumn<>("ID");
         idCol.setCellValueFactory(new PropertyValueFactory<>("idPrecio"));
@@ -976,6 +1014,132 @@ public class MaintenanceController implements Initializable {
             });
             return row;
         });
+    }
+
+    @FXML
+    private void filterRoom(ActionEvent event) {
+        String filtro = filterRoom_cb.getValue();
+
+        if (filtro == null) {
+            return;
+        }
+
+        Collection<MuSalas> salas = MuSalaJpa.findSalaEntities();
+        List<MuSalas> listaSalas = new ArrayList<>(salas);
+
+        if (filtro.equals("Orden alfabético")) {
+            listaSalas.sort(Comparator.comparing(MuSalas::getNombre, String.CASE_INSENSITIVE_ORDER));
+        }
+        if (filtro.equals("Todos")) {
+            uploadRoomsData();
+            return;
+        }
+
+        ObservableList<MuSalas> salasFX = FXCollections.observableArrayList(listaSalas);
+        roomsRegister_tv.setItems(salasFX);
+    }
+
+    @FXML
+    private void filterCollection(ActionEvent event) {
+        String filtro = filterCollections_cb.getValue();
+
+        if (filtro == null || filtro.equals("Todos")) {
+            uploadCollectionData();
+            return;
+        }
+
+        Collection<MuColecciones> colecciones = MuColecionesJpa.findColeccionEntities();
+        List<MuColecciones> lista = new ArrayList<>(colecciones);
+
+        if (filtro.equals("Orden alfabético")) {
+            lista.sort(Comparator.comparing(MuColecciones::getNombre, String.CASE_INSENSITIVE_ORDER));
+        }
+
+        ObservableList<MuColecciones> coleccionesFX = FXCollections.observableArrayList(lista);
+        collectionsRegister_tv.setItems(coleccionesFX);
+    }
+
+    @FXML
+    private void filterSpecies(ActionEvent event) {
+        String filtro = filterSpecies_cb.getValue();
+
+        if (filtro == null || filtro.equals("Todos")) {
+            uploadSpeciesData();
+            return;
+        }
+
+        Collection<MuEspecie> especies = MuEspecieJpa.findEspecieEntities();
+        List<MuEspecie> lista = new ArrayList<>(especies);
+
+        if (filtro.equals("Orden alfabético")) {
+            lista.sort(Comparator.comparing(MuEspecie::getNombreCientifico, String.CASE_INSENSITIVE_ORDER));
+        }
+
+        ObservableList<MuEspecie> especiesFX = FXCollections.observableArrayList(lista);
+        speciesRegister_tv.setItems(especiesFX);
+    }
+
+    @FXML
+    private void filterThemes(ActionEvent event) {
+        String filtroSeleccionado = filterThemes_cb.getValue();
+
+        if (filtroSeleccionado == null || filtroSeleccionado.equals("Todos")) {
+            uploadThemesData();
+            return;
+        }
+
+        Collection<MuTematicas> tematicas = MuTematicasJpa.findTematicaEntities();
+        List<MuTematicas> tematicasFiltradas = new ArrayList<>(tematicas);
+
+        if (filtroSeleccionado.equalsIgnoreCase("Orden alfabético")) {
+            tematicasFiltradas.sort(Comparator.comparing(MuTematicas::getNombre));
+        }
+
+        ObservableList<MuTematicas> tematicasFX = FXCollections.observableArrayList(tematicasFiltradas);
+        themesRegister_tv.setItems(tematicasFX);
+    }
+
+    @FXML
+    private void filterPrices(ActionEvent event) {
+        String rango1Texto = rangeOne_tf.getText();
+        String rango2Texto = rangeTwo_tf.getText();
+
+        if (rango1Texto.isEmpty() || rango2Texto.isEmpty()) {
+            Alert alerta = new Alert(Alert.AlertType.WARNING, "Debes ingresar ambos valores de rango.");
+            alerta.showAndWait();
+            return;
+        }
+
+        try {
+            int rango1 = Integer.parseInt(rango1Texto);
+            int rango2 = Integer.parseInt(rango2Texto);
+
+            if (rango1 > rango2) {
+                Alert alerta = new Alert(Alert.AlertType.WARNING, "El rango inicial no puede ser mayor que el rango final.");
+                alerta.showAndWait();
+                return;
+            }
+
+            Collection<MuPrecios> precios = MuPrecioJpa.findPreciosEntities();
+            List<MuPrecios> filtrados = precios.stream()
+                    .filter(p -> p.getMonto() >= rango1 && p.getMonto() <= rango2)
+                    .collect(Collectors.toList());
+
+            ObservableList<MuPrecios> preciosFX = FXCollections.observableArrayList(filtrados);
+            pricesAndRates_tv.setItems(preciosFX);
+
+            rangeOne_tf.clear();
+            rangeTwo_tf.clear();
+
+        } catch (NumberFormatException e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR, "Ambos rangos deben ser números enteros válidos.");
+            alerta.showAndWait();
+        }
+    }
+
+    @FXML
+    private void restorePrices(ActionEvent event) {
+        uploadPricesAndRatesData();
     }
 
 }

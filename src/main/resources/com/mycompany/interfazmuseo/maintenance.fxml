@@ -14,6 +14,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="770.0" prefWidth="1300.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.interfazmuseo.MaintenanceController">
     <stylesheets>
@@ -105,6 +107,8 @@
                               </ScrollPane>
                               <Button fx:id="roomEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#editRoomInfo" text="Editar" />
                               <Button fx:id="roomDelete_btn" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deleteRoomInfo" text="Eliminar" />
+                              <ChoiceBox fx:id="filterRoom_cb" layoutX="270.0" layoutY="17.0" prefHeight="11.0" prefWidth="150.0" />
+                              <Button fx:id="filterRoom_btn" layoutX="450.0" layoutY="17.0" mnemonicParsing="false" onAction="#filterRoom" text="Filtrar" />
                            </children>
                         </AnchorPane>
                         <Separator layoutX="-1.0" layoutY="538.0" prefHeight="11.0" prefWidth="669.0" />
@@ -146,6 +150,8 @@
                               </ScrollPane>
                               <Button fx:id="collectionsDelete_btn1" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deleteCollectionsInfo" text="Eliminar" />
                               <Button fx:id="collectionsEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#editCollectionsnfo" text="Editar" />
+                              <ChoiceBox fx:id="filterCollections_cb" layoutX="280.0" layoutY="17.0" prefHeight="11.0" prefWidth="150.0" />
+                              <Button fx:id="filterCollections_btn" layoutX="450.0" layoutY="17.0" mnemonicParsing="false" onAction="#filterCollection" text="Filtrar" />
                            </children>
                         </AnchorPane>
                         <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Colecciones" />
@@ -192,6 +198,8 @@
                               </ScrollPane>
                               <Button fx:id="speciesDelete_btn" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deleteSpeciesInfo" text="Eliminar" />
                               <Button fx:id="speciesEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#editSpeciesInfo" text="Editar" />
+                              <ChoiceBox fx:id="filterSpecies_cb" layoutX="280.0" layoutY="17.0" prefHeight="11.0" prefWidth="150.0" />
+                              <Button fx:id="filterSpecie_btn" layoutX="450.0" layoutY="17.0" mnemonicParsing="false" onAction="#filterSpecies" text="Filtrar" />
                            </children>
                         </AnchorPane>
                         <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Especies" />
@@ -236,6 +244,8 @@
                               </ScrollPane>
                               <Button fx:id="themesEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#ediTthemesInfo" text="Editar" />
                               <Button fx:id="themesDelete_btn" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deleteThemesInfo" text="Eliminar" />
+                              <ChoiceBox fx:id="filterThemes_cb" layoutX="280.0" layoutY="17.0" prefHeight="11.0" prefWidth="150.0" />
+                              <Button fx:id="filterThemes_btn" layoutX="450.0" layoutY="17.0" mnemonicParsing="false" onAction="#filterThemes" text="Filtrar" />
                            </children>
                         </AnchorPane>
                         <Label layoutX="13.0" layoutY="12.0" styleClass="textStyle" text="Gestión de Temáticas" />
@@ -267,6 +277,25 @@
                               </ScrollPane>
                               <Button fx:id="pricesAndRatesDelete_btn" layoutX="37.0" layoutY="604.0" mnemonicParsing="false" onAction="#deletePricesAndRatesInfo" text="Eliminar" />
                               <Button fx:id="pricesAndRatesEdit_btn" layoutX="426.0" layoutY="604.0" mnemonicParsing="false" onAction="#editPricesAndRatesInfo" text="Editar" />
+                              <TextField fx:id="rangeOne_tf" layoutX="13.0" layoutY="60.0" prefHeight="32.0" prefWidth="117.0" />
+                              <TextField fx:id="rangeTwo_tf" layoutX="178.0" layoutY="60.0" prefHeight="32.0" prefWidth="117.0" />
+                              <Button fx:id="filterPrice_btn" layoutX="314.0" layoutY="53.0" mnemonicParsing="false" onAction="#filterPrices" text="Filtrar" />
+                              <Text layoutX="150.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="a" wrappingWidth="15.10546875">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="39.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rango 1" wrappingWidth="81.10546875">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="202.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rango 2" wrappingWidth="81.10546875">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <Button fx:id="restorePrice_btn" layoutX="414.0" layoutY="53.0" mnemonicParsing="false" onAction="#restorePrices" prefHeight="25.0" prefWidth="102.0" text="Restaurar" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="contentTab">

@@ -1,13 +1,19 @@
 package controllers;
 
+import clases.CrearPDF;
+import clases.ListSalas;
 import com.mycompany.interfazmuseo.*;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import persistence.MuSalas;
+
 
 public class MuSalasJpaController {
 
@@ -100,4 +106,20 @@ public class MuSalasJpaController {
             em.close();
         }
     }
+    
+    public void generarReporteSalas(boolean mejores, String nombreArchivo) throws IOException {
+    List<MuSalas> todasLasSalas = new ArrayList<>(findSalaEntities());
+    List<MuSalas> seleccionadas;
+
+    if (mejores) {
+        seleccionadas = ListSalas.obtenerMejoresSalas(todasLasSalas);
+    } else {
+        seleccionadas = ListSalas.obtenerPeoresSalas(todasLasSalas);
+    }
+
+    String titulo = mejores ? "Top 10 Salas Mejor Valoradas" : "Top 10 Salas Peor Valoradas";
+
+    CrearPDF.generarPDF(seleccionadas, titulo, nombreArchivo);
+    System.out.println("PDF generado correctamente: " + nombreArchivo);
+}
 }

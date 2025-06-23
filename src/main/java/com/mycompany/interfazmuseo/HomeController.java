@@ -11,9 +11,11 @@ import javafx.scene.control.Button;
 
 public class HomeController implements Initializable {
 
-   @Override
+
+
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+  
     }    
-    
+
 }

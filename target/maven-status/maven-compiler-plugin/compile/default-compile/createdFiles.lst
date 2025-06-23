@@ -9,7 +9,6 @@ persistence\MuMuseos.class
 com\mycompany\interfazmuseo\ReportController.class
 controllers\MuFichasJpaController.class
 controllers\MuMuseosJpaController.class
-com\mycompany\interfazmuseo\Entrada.class
 com\mycompany\interfazmuseo\RatingController.class
 persistence\MuColecciones.class
 persistence\MuSalas.class
@@ -18,13 +17,13 @@ controllers\exceptions\PreexistingEntityException.class
 com\mycompany\interfazmuseo\TicketsController$1.class
 controllers\MuEntradasJpaController.class
 controllers\MuTematicasJpaController.class
+clases\CrearPDF.class
 com\mycompany\interfazmuseo\TicketsController$TicketPurchase.class
 controllers\MuComisionJpaController.class
 persistence\MuPrecios.class
 controllers\MuEspecieJpaController.class
 persistence\MuTematicas.class
 com\mycompany\interfazmuseo\MaintenanceController.class
-com\mycompany\interfazmuseo\QRManager.class
 persistence\MuEntradas.class
 controllers\MuPreciosJpaController.class
 com\mycompany\interfazmuseo\RatingController$1.class
@@ -33,4 +32,6 @@ com\mycompany\interfazmuseo\TicketsController$2.class
 com\mycompany\interfazmuseo\TicketsController.class
 com\mycompany\interfazmuseo\App.class
 controllers\MuTransaccionJpaController.class
+clases\QRManager.class
+clases\ListSalas.class
 persistence\MuEspecie.class

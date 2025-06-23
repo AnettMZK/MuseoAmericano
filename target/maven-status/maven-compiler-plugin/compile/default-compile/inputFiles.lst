@@ -1,32 +1,33 @@
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuSalas.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuMuseosJpaController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuEspecie.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuTematicasJpaController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\com\mycompany\interfazmuseo\Entrada.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuTransaccion.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\com\mycompany\interfazmuseo\QRManager.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuFichasJpaController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuEspecieJpaController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\com\mycompany\interfazmuseo\App.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuColeccionesJpaController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\com\mycompany\interfazmuseo\ReportController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuComision.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\com\mycompany\interfazmuseo\HomeController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuEntradas.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\exceptions\PreexistingEntityException.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuFichas.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuComisionJpaController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuSalasJpaController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuPreciosJpaController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\com\mycompany\interfazmuseo\RatingController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\exceptions\IllegalOrphanException.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuMuseos.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\com\mycompany\interfazmuseo\TicketsController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuTematicas.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuTransaccionJpaController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuPrecios.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\exceptions\NonexistentEntityException.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\com\mycompany\interfazmuseo\MaintenanceController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\persistence\MuColecciones.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\com\mycompany\interfazmuseo\WindowController.java
-C:\Users\Yulieth\Desktop\Museoooooooo\src\main\java\controllers\MuEntradasJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\com\mycompany\interfazmuseo\MaintenanceController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\exceptions\PreexistingEntityException.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\exceptions\NonexistentEntityException.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\com\mycompany\interfazmuseo\ReportController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuColecciones.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuSalas.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuEntradasJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\com\mycompany\interfazmuseo\RatingController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\clases\ListSalas.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\com\mycompany\interfazmuseo\App.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\com\mycompany\interfazmuseo\TicketsController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuMuseosJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuPreciosJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuFichas.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuTematicas.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\com\mycompany\interfazmuseo\HomeController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuFichasJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuPrecios.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuTematicasJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\com\mycompany\interfazmuseo\WindowController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuComisionJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\clases\CrearPDF.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuColeccionesJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuTransaccionJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\clases\QRManager.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuEspecieJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\MuSalasJpaController.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuMuseos.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuEspecie.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuEntradas.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuComision.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\controllers\exceptions\IllegalOrphanException.java
+D:\Progra II\Proyectos\MuseoAmericano\src\main\java\persistence\MuTransaccion.java

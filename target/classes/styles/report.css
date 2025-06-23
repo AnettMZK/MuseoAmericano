@@ -5,3 +5,23 @@
 .mainFxmlClass {
 
 }
+
+Button {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 18px;
+    -fx-text-fill: #edeae2;
+    -fx-background-color: #353331;
+    -fx-background-radius: 10;
+}
+
+Label {
+    -fx-font-family: "Bodoni Moda 9pt";
+    -fx-font-size: 20px;
+    -fx-text-fill: #353331;
+}
+
+
+.contentAnchorPane {
+    -fx-background-color: #ece9e1;
+    -fx-background-radius: 20px;
+}
