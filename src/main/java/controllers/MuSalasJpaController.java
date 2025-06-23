@@ -9,7 +9,6 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import persistence.MuSalas;
 
-
 public class MuSalasJpaController {
 
     private EntityManagerFactory emf = null;
@@ -88,4 +87,17 @@ public class MuSalasJpaController {
         }
     }
 
+    public MuSalas findById(int id) {
+        EntityManager em = this.getEmf().createEntityManager();
+
+        try {
+            MuSalas sala = em.find(MuSalas.class, id);
+            if (sala != null) {
+                em.refresh(sala);
+            }
+            return sala;
+        } finally {
+            em.close();
+        }
+    }
 }

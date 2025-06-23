@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1300.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.interfazmuseo.TicketsController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1300.0" stylesheets="@../../../styles/tickets.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.interfazmuseo.TicketsController">
    <tabs>
       <Tab text="Comprar Entrada">
          <content>
@@ -126,11 +126,14 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="740.0" prefWidth="1300.0">
                <children>
-                  <ImageView fx:id="exhibitionImage_iv" fitHeight="364.0" fitWidth="270.0" layoutX="50.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="exhibitionImage_iv" fitHeight="364.0" fitWidth="270.0" layoutX="60.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/exposicionPrueba.jpeg" />
                      </image>
                   </ImageView>
+                 
+<ImageView fx:id="qrImage_iv" fitHeight="150.0" fitWidth="150.0" layoutX="209.0" layoutY="276.0" preserveRatio="true" />
+
                   <TableView fx:id="availableRooms_tv" layoutX="628.0" layoutY="100.0" prefHeight="600.0" prefWidth="600.0">
                      <columns>
                         <TableColumn prefWidth="300.0" text="Nombre Sala" />
@@ -146,7 +149,7 @@
                   </Label>
                   <TextField fx:id="qrCode_tf" layoutX="150.0" layoutY="50.0" prefHeight="27.0" prefWidth="244.0" />
                   <Button fx:id="validate_btn" layoutX="400.0" layoutY="50.0" mnemonicParsing="false" onAction="#validateTicket" text="Validar" />
-                  <Label fx:id="museumInfo_lb" layoutX="50.0" layoutY="130.0" styleClass="textInfo" text="Museo: N/A" />
+                  <Label fx:id="museumInfo_lb" layoutX="50.0" layoutY="130.0" prefHeight="35.0" prefWidth="163.0" styleClass="textInfo" text="Museo: N/A" />
                   <Label fx:id="dateOfVisit_lb" layoutX="50.0" layoutY="160.0" styleClass="textInfo" text="Fecha: N/A" />
                   <Label fx:id="visitorName_lb" layoutX="50.0" layoutY="190.0" styleClass="textInfo" text="Visitante: N/A" />
                </children>

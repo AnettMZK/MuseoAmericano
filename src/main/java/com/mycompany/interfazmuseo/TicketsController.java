@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import persistence.MuEntradas;
 import persistence.MuMuseos;
@@ -72,6 +73,8 @@ public class TicketsController implements Initializable {
     private TextField qrCode_tf;
     @FXML
     private Button validate_btn;
+    @FXML
+    private ImageView qrImage_iv; // New ImageView for QR code display
 
     private MuMuseosJpaController museumJpa = new MuMuseosJpaController();
     private MuPreciosJpaController priceJpa = new MuPreciosJpaController();
@@ -79,11 +82,11 @@ public class TicketsController implements Initializable {
     private MuTransaccionJpaController transactionJpa = new MuTransaccionJpaController();
     private MuComisionJpaController commissionJpa = new MuComisionJpaController();
     private MuSalasJpaController salasJpa = new MuSalasJpaController();
+    private QRManager qrManager = new QRManager();
 
     private ObservableList<TicketPurchase> cartItems = FXCollections.observableArrayList();
     private final double IVA_RATE = 0.05; // 5% commission as per mu_comision data
 
-    // Inner class to represent items in the shopping cart table
     public static class TicketPurchase {
         private final SimpleStringProperty museumName;
         private final SimpleStringProperty visitorName;
@@ -94,25 +97,26 @@ public class TicketsController implements Initializable {
         private MuEntradas ticket;
         private MuTransaccion transaction;
         private MuComision commission;
+        private String qrImagePath; // New field for QR image path
 
-        public TicketPurchase(String museumName, String visitorName, String date, String ticketType, String amount, String qrCode) {
+        public TicketPurchase(String museumName, String visitorName, String date, String ticketType, String amount, String qrCode, String qrImagePath) {
             this.museumName = new SimpleStringProperty(museumName);
             this.visitorName = new SimpleStringProperty(visitorName);
             this.date = new SimpleStringProperty(date);
             this.ticketType = new SimpleStringProperty(ticketType);
             this.amount = new SimpleStringProperty(amount);
             this.qrCode = new SimpleStringProperty(qrCode);
+            this.qrImagePath = qrImagePath;
         }
 
-        // Getters for table properties
         public String getMuseumName() { return museumName.get(); }
         public String getVisitorName() { return visitorName.get(); }
         public String getDate() { return date.get(); }
         public String getTicketType() { return ticketType.get(); }
         public String getAmount() { return amount.get(); }
         public String getQrCode() { return qrCode.get(); }
+        public String getQrImagePath() { return qrImagePath; }
 
-        // Setters for database entities
         public void setTicket(MuEntradas ticket) { this.ticket = ticket; }
         public void setTransaction(MuTransaccion transaction) { this.transaction = transaction; }
         public void setCommission(MuComision commission) { this.commission = commission; }
@@ -120,38 +124,20 @@ public class TicketsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Initialize card types
         cardType_cb.getItems().addAll("Visa", "Mastercard", "American Express", "Dinner Club", "Union Pay");
-
-        // Initialize museum types
         ObservableList<MuMuseos> museums = FXCollections.observableArrayList(museumJpa.findMuseoEntities());
         museumType_cb.setItems(museums);
         museumType_cb.setConverter(new javafx.util.StringConverter<MuMuseos>() {
-            @Override
-            public String toString(MuMuseos museum) {
-                return museum != null ? museum.getNombre() : "";
-            }
-            @Override
-            public MuMuseos fromString(String string) {
-                return museums.stream().filter(m -> m.getNombre().equals(string)).findFirst().orElse(null);
-            }
+            @Override public String toString(MuMuseos museum) { return museum != null ? museum.getNombre() : ""; }
+            @Override public MuMuseos fromString(String string) { return museums.stream().filter(m -> m.getNombre().equals(string)).findFirst().orElse(null); }
         });
-
-        // Initialize price types
         ObservableList<MuPrecios> prices = FXCollections.observableArrayList(priceJpa.findPreciosEntities());
         priceType_cb.setItems(prices);
         priceType_cb.setConverter(new javafx.util.StringConverter<MuPrecios>() {
-            @Override
-            public String toString(MuPrecios price) {
-                return price != null ? price.getNombrePrecio() + " ($" + price.getMonto() + ")" : "";
-            }
-            @Override
-            public MuPrecios fromString(String string) {
-                return prices.stream().filter(p -> (p.getNombrePrecio() + " ($" + p.getMonto() + ")").equals(string)).findFirst().orElse(null);
-            }
+            @Override public String toString(MuPrecios price) { return price != null ? price.getNombrePrecio() + " ($" + price.getMonto() + ")" : ""; }
+            @Override public MuPrecios fromString(String string) { return prices.stream().filter(p -> (p.getNombrePrecio() + " ($" + p.getMonto() + ")").equals(string)).findFirst().orElse(null); }
         });
 
-        // Initialize shopping table columns
         shoppingTable_tv.getColumns().clear();
         TableColumn<TicketPurchase, String> museumCol = new TableColumn<>("Museo");
         museumCol.setCellValueFactory(new PropertyValueFactory<>("museumName"));
@@ -168,7 +154,6 @@ public class TicketsController implements Initializable {
         shoppingTable_tv.getColumns().addAll(museumCol, visitorCol, dateCol, ticketTypeCol, amountCol, qrCodeCol);
         shoppingTable_tv.setItems(cartItems);
 
-        // Initialize available rooms table
         availableRooms_tv.getColumns().clear();
         TableColumn<MuSalas, String> roomNameCol = new TableColumn<>("Nombre Sala");
         roomNameCol.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -176,7 +161,6 @@ public class TicketsController implements Initializable {
         roomDescCol.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         availableRooms_tv.getColumns().addAll(roomNameCol, roomDescCol);
 
-        // Set default values for labels
         ticketPrice_lb.setText("0");
         IVA_lb.setText("0");
         totalTicket_lb.setText("0");
@@ -201,38 +185,37 @@ public class TicketsController implements Initializable {
             return;
         }
 
-        // Calculate prices
         int basePrice = selectedPrice.getMonto();
         double iva = basePrice * IVA_RATE;
         int totalPrice = (int) (basePrice + iva);
-
-        // Generate QR code (simple UUID for now)
         String qrCode = "QR-" + UUID.randomUUID().toString().substring(0, 8);
+        String qrImagePath = qrManager.generarQR(qrCode); // Generate QR image
 
-        // Create ticket purchase object
         TicketPurchase purchase = new TicketPurchase(
             selectedMuseum.getNombre(),
             visitorName,
             selectedDate.toString(),
             selectedPrice.getNombrePrecio(),
             String.valueOf(totalPrice),
-            qrCode
+            qrCode,
+            qrImagePath
         );
 
-        // Update price labels
         ticketPrice_lb.setText(String.valueOf(basePrice));
         IVA_lb.setText(String.format("%.2f", iva));
         totalTicket_lb.setText(String.valueOf(totalPrice));
 
-        // Add to cart
         cartItems.add(purchase);
-
-        // Clear input fields
         visitorsName_tf.clear();
         museumType_cb.setValue(null);
         priceType_cb.setValue(null);
         availability_dp.setValue(null);
         cardType_cb.setValue(null);
+
+        // Optionally display the QR image
+        if (qrImagePath != null) {
+            qrImage_iv.setImage(new Image("file:" + qrImagePath));
+        }
     }
 
     @FXML
@@ -247,7 +230,6 @@ public class TicketsController implements Initializable {
 
         try {
             for (TicketPurchase purchase : cartItems) {
-                // Create MuEntradas
                 MuEntradas ticket = new MuEntradas();
                 ticket.setIdMuseo(museumJpa.findMuseoEntities().stream()
                     .filter(m -> m.getNombre().equals(purchase.getMuseumName()))
@@ -256,10 +238,10 @@ public class TicketsController implements Initializable {
                 ticket.setFecha(java.sql.Date.valueOf(LocalDate.parse(purchase.getDate())));
                 ticket.setCodigoQr(purchase.getQrCode());
                 ticket.setPrecioTotal(Integer.parseInt(purchase.getAmount()));
+                ticket.setQrImagePath(purchase.getQrImagePath()); // Store QR image path
                 ticketJpa.create(ticket);
                 purchase.setTicket(ticket);
 
-                // Create MuTransaccion
                 MuTransaccion transaction = new MuTransaccion();
                 transaction.setIdEntrada(ticket);
                 transaction.setTipoTarjeta(cardType_cb.getValue() != null ? cardType_cb.getValue() : "Visa");
@@ -267,7 +249,6 @@ public class TicketsController implements Initializable {
                 transactionJpa.create(transaction);
                 purchase.setTransaction(transaction);
 
-                // Create MuComision
                 MuComision commission = new MuComision();
                 commission.setIdTransaccion(transaction);
                 commission.setComision("5%");
@@ -281,11 +262,11 @@ public class TicketsController implements Initializable {
             alert.setContentText("Compra realizada con éxito. Las entradas han sido guardadas.");
             alert.showAndWait();
 
-            // Clear cart and labels
             cartItems.clear();
             ticketPrice_lb.setText("0");
             IVA_lb.setText("0");
             totalTicket_lb.setText("0");
+            qrImage_iv.setImage(null); // Clear QR image
 
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -298,8 +279,8 @@ public class TicketsController implements Initializable {
 
     @FXML
     private void validateTicket(ActionEvent event) {
-        String qrCode = qrCode_tf.getText();
-        if (qrCode.isEmpty()) {
+        String qrCodeInput = qrCode_tf.getText();
+        if (qrCodeInput.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Advertencia");
             alert.setContentText("Por favor, ingrese un código QR.");
@@ -308,7 +289,7 @@ public class TicketsController implements Initializable {
         }
 
         MuEntradas ticket = ticketJpa.findEntradasEntities().stream()
-            .filter(t -> t.getCodigoQr().equals(qrCode))
+            .filter(t -> t.getCodigoQr().equals(qrCodeInput))
             .findFirst()
             .orElse(null);
 
@@ -324,12 +305,9 @@ public class TicketsController implements Initializable {
             return;
         }
 
-        // Update ticket details
         museumInfo_lb.setText("Museo: " + ticket.getIdMuseo().getNombre());
         dateOfVisit_lb.setText("Fecha: " + ticket.getFecha().toString());
         visitorName_lb.setText("Visitante: " + ticket.getNombreCliente());
-
-        // Load available rooms for the museum
         ObservableList<MuSalas> rooms = FXCollections.observableArrayList(
             salasJpa.findSalaEntities().stream()
                 .filter(s -> s.getIdMuseo().getIdMuseo().equals(ticket.getIdMuseo().getIdMuseo()))
@@ -341,5 +319,10 @@ public class TicketsController implements Initializable {
         alert.setTitle("Éxito");
         alert.setContentText("Entrada válida. Puede acceder a las instalaciones.");
         alert.showAndWait();
+
+        // Optional: Display the QR image if stored
+        if (ticket.getQrImagePath() != null) {
+            exhibitionImage_iv.setImage(new Image("file:" + ticket.getQrImagePath()));
+        }
     }
 }
